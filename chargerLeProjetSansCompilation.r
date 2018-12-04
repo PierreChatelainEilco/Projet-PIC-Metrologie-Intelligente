@@ -1,3 +1,5 @@
+library(uHMM);
+
 # Charger les bibliotheques
 paquets=c("tcltk","tcltk2","tkrplot", "HMM", "clValid", "class", "cluster","FactoMineR", "corrplot", "chron");
 for(paquet in paquets)
