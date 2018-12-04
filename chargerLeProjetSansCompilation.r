@@ -12,3 +12,4 @@ for(fichier in fichiers)
 {
   source(fichier);
 }
+uHMMinterface();
