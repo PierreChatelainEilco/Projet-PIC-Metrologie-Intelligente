@@ -15,43 +15,48 @@ uHMMinterface<-function(uHMMenv=NULL){
   }
   
   # language selection window
-  languageWindow <- tktoplevel()
-  tktitle(languageWindow) <- "uHMM interface"
+  languageWindow<-tktoplevel()
+  tktitle(languageWindow)<-"uHMM interface"
   .logoFrame(languageWindow)
   
   # Language selection frame
-  languageWindow$languageBlock <- tkwidget(languageWindow, "labelframe")
-  tkconfigure(languageWindow$languageBlock, text=paste("Please select your language/\nVeuillez s",intToUtf8(0233),"lectionner votre langue",sep=""))
-  tkconfigure(languageWindow$languageBlock, borderwidth=0)
-  tkgrid(languageWindow$languageBlock, padx=c(100,100), pady=c(50,50), column=1, row=1) 
+  languageBlock <- tkwidget(languageWindow,"labelframe",text=paste("Please select your language/\nVeuillez s",intToUtf8(0233),"lectionner votre langue",sep=""),borderwidth = 0)
+  tkgrid(languageBlock,padx=c(100,100),pady=c(50,50),column=1,row=1) 
   
-  # Engish Button
-  languageWindow$languageBlock$englishButton <- tkbutton(languageWindow$languageBlock)
-  languageWindow$languageBlock$englishButton.fun <- function(){
-    tkdestroy(languageWindow)
-    tm <- .languageManagement("en")
-    mainWindow <- tktoplevel()
-    tktitle(mainWindow) <- tm$mainWindowTitle  
+  
+  englishButton<-tkbutton(languageBlock,text="English/Anglais",compound = "left", command=function(){
+    tkdestroy(languageWindow)  
+    tm<-.languageManagement("en")
+    
+    
+    mainWindow<-tktoplevel()
+    tktitle(mainWindow)<-tm$mainWindowTitle  
+    
+    
     .firstTab(mainWindow,tm,"en",uHMMenv,leftMargin=30,hscaleGraphicFrame=1.2,vscaleGraphicFrame=1.2)
-  }
-  tkconfigure(languageWindow$languageBlock$englishButton, text="English/Anglais")
-  tkconfigure(languageWindow$languageBlock$englishButton, compound="left")
-  tkconfigure(languageWindow$languageBlock$englishButton, command=languageWindow$languageBlock$englishButton.fun)
-  tkgrid(languageWindow$languageBlock$englishButton,padx=20)
+    
+  })
+  tkgrid(englishButton,padx=20)
   
-  # French Button
-  languageWindow$languageBlock$frenchButton <- tkbutton(languageWindow$languageBlock)
-  languageWindow$languageBlock$frenchButton.fun <- function(){
+  
+  
+  
+  frenchButton<-tkbutton(languageBlock,text=paste("French/Fran",intToUtf8(0231),"ais",sep=""),compound = "left",command=function(){
     tkdestroy(languageWindow) 
-    tm <- .languageManagement("fr")
-    mainWindow <- tktoplevel()
+    tm<-.languageManagement("fr")
+    
+    mainWindow<-tktoplevel()
     #tkwm.geometry(mainWindow, "1350x760")
-    tktitle(mainWindow) <- tm$mainWindowTitle  
-    .firstTab(mainWindow,tm,"fr",uHMMenv,leftMargin=30,hscaleGraphicFrame=1.2,vscaleGraphicFrame=1.2)
-  }
-  tkconfigure(languageWindow$languageBlock$frenchButton, text=paste("French/Fran",intToUtf8(0231),"ais",sep=""))
-  tkconfigure(languageWindow$languageBlock$frenchButton, compound="left")
-  tkconfigure(languageWindow$languageBlock$frenchButton, command=languageWindow$languageBlock$frenchButton.fun)
-  tkgrid(languageWindow$languageBlock$frenchButton,padx=20)
+    tktitle(mainWindow)<-tm$mainWindowTitle  
 
+    
+    .firstTab(mainWindow,tm,"fr",uHMMenv,leftMargin=30,hscaleGraphicFrame=1.2,vscaleGraphicFrame=1.2)
+    
+    
+  })
+  tkgrid(frenchButton,padx=20)
+
+  
 }
+
+
