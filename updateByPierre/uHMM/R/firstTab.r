@@ -78,29 +78,32 @@
   tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=5)
   
   # Metrology
-  
+  cadreMetrology<-tkwidget(schemeFrame,"labelframe")
+  tkgrid(cadreMetrology, columnspan=1,row=6)
+  tkgrid(tklabel(cadreMetrology, text="test", font = schemeFont),pady=3,column=0, row=4)
+  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=7)
   
   # variable selection
   cadreVariables<-tkwidget(schemeFrame,"labelframe")
-  tkgrid(cadreVariables, columnspan=1, row=6)
+  tkgrid(cadreVariables, columnspan=1, row=8)
   tkgrid(tk2label(cadreVariables, text=tm$variableScheme,font = schemeFont),pady=3,column = 0, row = 4)
-  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=7)
+  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=9)
   
   # classification
   cadreClassification<-tkwidget(schemeFrame,"labelframe")
-  tkgrid(cadreClassification, columnspan=1, row=8)
+  tkgrid(cadreClassification, columnspan=1, row=10)
   tkgrid(tklabel(cadreClassification, text=tm$classificationScheme,font = schemeFont),pady=3,column = 0, row = 4)
-  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=9)
+  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=11)
   
   # modelisation
   cadreModeling<-tkwidget(schemeFrame,"labelframe")
-  tkgrid(cadreModeling, columnspan=1, row=10)
+  tkgrid(cadreModeling, columnspan=1, row=12)
   tkgrid(tklabel(cadreModeling, text=tm$modelingScheme,font = schemeFont),pady=3,column = 0, row = 4)
-  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=11)
+  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=13)
   
   # prediction
   cadrePrediction<-tkwidget(schemeFrame,"labelframe")
-  tkgrid(cadrePrediction, columnspan=1, row=12,pady=c(0,10))
+  tkgrid(cadrePrediction, columnspan=1, row=14,pady=c(0,10))
   tkgrid(tklabel(cadrePrediction, text=tm$predictionScheme,font = schemeFont),pady=3,column = 0, row = 4)
   
   #Recommended equipment Frame
