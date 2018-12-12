@@ -80,7 +80,7 @@
   # Metrology
   cadreMetrology<-tkwidget(schemeFrame,"labelframe")
   tkgrid(cadreMetrology, columnspan=1,row=6)
-  tkgrid(tklabel(cadreMetrology, text="test", font = schemeFont),pady=3,column=0, row=4)
+  tkgrid(tklabel(cadreMetrology, text=tm$metrologyScheme, font = schemeFont),pady=3,column=0, row=4)
   tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=7)
   
   # variable selection

@@ -110,89 +110,95 @@
   tkgrid(nextTabFrame , column=0,row=7,padx=c(leftMargin,0),pady=c(50,0),sticky="w")
   
   
-  classifButton<-tk2button(nextTabFrame,text=tm$classificationTabLabel,image="run",compound = "left",command=function(){
-    
-    if(!exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
-        assign("rawData",MarelCarnot,envir=uHMMenv)
-        assign("firstDataFile","MarelCarnot",uHMMenv)
-        assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
-      }
-    
-    if(!exists("rawData",where=uHMMenv)){
-      tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
-    }
-    else if(uHMMenv$saveDirectory==""){
-      tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
-    }else{
-
-      .variableTab(leftMargin=leftMargin,userType=userType,tm=tm,
-                  console=console,graphicFrame=graphicFrame,win1=win1,
-                  uHMMenv=uHMMenv)
-      tk2notetab.select(win1$env$nb, tm$variableTabLabel)
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-      
-    }
-  })
-  tkgrid(classifButton,row=7,column=1)
+  # classifButton<-tk2button(nextTabFrame,text=tm$classificationTabLabel,image="run",compound = "left",command=function(){
+  #   
+  #   if(!exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
+  #       assign("rawData",MarelCarnot,envir=uHMMenv)
+  #       assign("firstDataFile","MarelCarnot",uHMMenv)
+  #       assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
+  #     }
+  #   
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }
+  #   else if(uHMMenv$saveDirectory==""){
+  #     tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }else{
+  # 
+  #     .variableTab(leftMargin=leftMargin,userType=userType,tm=tm,
+  #                 console=console,graphicFrame=graphicFrame,win1=win1,
+  #                 uHMMenv=uHMMenv)
+  #     tk2notetab.select(win1$env$nb, tm$variableTabLabel)
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  #     
+  #   }
+  # })
+  # tkgrid(classifButton,row=7,column=1)
+  # 
+  # 
+  # modelingButton<-tk2button(nextTabFrame,text=tm$modelingTabLabel,image="run",compound = "left",command=function(){
+  #   
+  #   if(!exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
+  #     assign("rawData",MarelCarnot,envir=uHMMenv)
+  #     assign("firstDataFile","MarelCarnot",uHMMenv)
+  #     assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
+  #   }
+  #   
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }
+  #   else if(uHMMenv$saveDirectory==""){
+  #     tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }else{
+  #     
+  #     .modelingTab(leftMargin=leftMargin,tm=tm,
+  #                 console=console,graphicFrame=graphicFrame,win1=win1,
+  #                 uHMMenv=uHMMenv)
+  #     tk2notetab.select(win1$env$nb, tm$modelingTabLabel)
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  #   }
+  # })
+  # tkgrid(modelingButton,row=8,column=1)
+  # 
+  # 
+  # predictButton<-tk2button(nextTabFrame,text=tm$predictionTabLabel,image="run",compound = "left",command=function(){
+  #   
+  #   if(!exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
+  #     assign("rawData",MarelCarnot,envir=uHMMenv)
+  #     assign("firstDataFile","MarelCarnot",uHMMenv)
+  #     assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
+  #   }
+  #   
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }
+  #   else if(uHMMenv$saveDirectory==""){
+  #     tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }else{
+  #     assign("rawValidData",uHMMenv$rawData,envir=uHMMenv)
+  #     assign("rawValidMoments",uHMMenv$rawMoments,envir=uHMMenv)
+  #     .predictionTab(leftMargin=leftMargin,tm=tm,
+  #                   console=console,graphicFrame=graphicFrame,win1=win1,
+  #                   uHMMenv=uHMMenv)
+  #     .periodSelectionFrame(data=uHMMenv$rawValidData,tm=tm,
+  #                          leftMargin=leftMargin,uHMMenv=uHMMenv,win1=win1)
+  #     tk2notetab.select(win1$env$nb, tm$predictionTabLabel)
+  # 
+  #     fileLab<-tklabel(win1$env$prediction,text=uHMMenv$firstDataFile)
+  #     tkgrid(fileLab,row=3,column=1,sticky="w")
+  #     
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  #   }
+  #   
+  # })
+  # tkgrid(predictButton,row=9,column=1)
   
-  
-  modelingButton<-tk2button(nextTabFrame,text=tm$modelingTabLabel,image="run",compound = "left",command=function(){
+  metrologyButton <- tk2button(nextTabFrame,text=tm$metrologyTabLabel,image="run",compound = "left")
+  metrologyButton.fun <- function(){
     
-    if(!exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
-      assign("rawData",MarelCarnot,envir=uHMMenv)
-      assign("firstDataFile","MarelCarnot",uHMMenv)
-      assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
-    }
-    
-    if(!exists("rawData",where=uHMMenv)){
-      tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
-    }
-    else if(uHMMenv$saveDirectory==""){
-      tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
-    }else{
-      
-      .modelingTab(leftMargin=leftMargin,tm=tm,
-                  console=console,graphicFrame=graphicFrame,win1=win1,
-                  uHMMenv=uHMMenv)
-      tk2notetab.select(win1$env$nb, tm$modelingTabLabel)
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-    }
-  })
-  tkgrid(modelingButton,row=8,column=1)
-  
-  
-  predictButton<-tk2button(nextTabFrame,text=tm$predictionTabLabel,image="run",compound = "left",command=function(){
-    
-    if(!exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
-      assign("rawData",MarelCarnot,envir=uHMMenv)
-      assign("firstDataFile","MarelCarnot",uHMMenv)
-      assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
-    }
-    
-    if(!exists("rawData",where=uHMMenv)){
-      tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
-    }
-    else if(uHMMenv$saveDirectory==""){
-      tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
-    }else{
-      assign("rawValidData",uHMMenv$rawData,envir=uHMMenv)
-      assign("rawValidMoments",uHMMenv$rawMoments,envir=uHMMenv)
-      .predictionTab(leftMargin=leftMargin,tm=tm,
-                    console=console,graphicFrame=graphicFrame,win1=win1,
-                    uHMMenv=uHMMenv)
-      .periodSelectionFrame(data=uHMMenv$rawValidData,tm=tm,
-                           leftMargin=leftMargin,uHMMenv=uHMMenv,win1=win1)
-      tk2notetab.select(win1$env$nb, tm$predictionTabLabel)
-
-      fileLab<-tklabel(win1$env$prediction,text=uHMMenv$firstDataFile)
-      tkgrid(fileLab,row=3,column=1,sticky="w")
-      
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-    }
-    
-  })
-  tkgrid(predictButton,row=9,column=1)
-  
+  }
+  tkconfigure(metrologyButton,command=metrologyButton.fun)
+  tkgrid(metrologyButton,row=10,column=1)
   
   tkgrid(tklabel(win1$env$import, text="      "), column=1, row=8)
   
