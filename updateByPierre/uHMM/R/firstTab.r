@@ -56,7 +56,7 @@
   
   win1$env$overview <- tk2notetab(win1$env$nb, tm$overviewTabLabel)
   win1$env$import <- tk2notetab(win1$env$nb, tm$importTabLabel)
-  win1$env$conditioning <- tk2notetab(win1$env$nb, tm$metrologyTabLabel)
+  win1$env$metrology<- tk2notetab(win1$env$nb, tm$metrologyTabLabel)
   win1$env$variables <- tk2notetab(win1$env$nb, tm$variableTabLabel)
   win1$env$classification <- tk2notetab(win1$env$nb, tm$classificationTabLabel)
   win1$env$modelisation <- tk2notetab(win1$env$nb, tm$modelingTabLabel)
