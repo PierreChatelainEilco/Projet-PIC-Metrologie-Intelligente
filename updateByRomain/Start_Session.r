@@ -8,7 +8,7 @@ for(paquet in paquets)
 }
 
 # Charger les fichiers R
-repertoireSource="C:\\Users\\vergo\\Desktop\\R_Project\\uHMM\\R";
+repertoireSource="C:\\Users\\Alain\\Desktop\\updateByRomain\\uHMM\\R";
 fichiers = list.files(path=repertoireSource,pattern=".r",full.names = T);
 for(fichier in fichiers)
 {
