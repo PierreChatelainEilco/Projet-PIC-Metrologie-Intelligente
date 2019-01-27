@@ -53,12 +53,228 @@ La fonction `maape` calcule le MAAPE.
 La fonction `mae` calcule le MAE. 
 
 #MAPE
-La fonction `mape`calcuke le MAPE.
+La fonction `mape` calcule le MAPE.
 
+#MASE
+La fonction `mase` calcule le MASE.
 
+#MdAE
+La fonction `mdae` calcule le MdAE.
 
+#Min-Max normalises
+Les fonctions `norm_min_max` et `norm_min_max_list` effectuent une normalisation Min-Max.
 
+#Z-score
+Les fonctions `norm_z` et `norm_z_list` effectuent une normalisation gausienne.
 
+#DCT représentation
+DCT : Discrete Cosine Transforme
+
+```{r}
+n <- 20
+y <- repr_dct(monSignal,coef=n)
+plot(y)
+```
+
+#DFT représentation par FFT
+DFT : Discrete Fourier Transform by Fast Fourier Transform
+```{r}
+n <- 100
+y <- repr_dft(monSignal,coef=n)
+plot(y)
+```
+
+#DWT représentation
+DWT : Discrete Wavelet Transform
+
+##filter haar
+```{r}
+level = 4
+filter <- "haar"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+##filter d4, d6, ..., d20
+```{r}
+level = 4
+filter <- "d4"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+```{r}
+level = 4
+filter <- "d6"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+```{r}
+level = 4
+filter <- "d20"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+##filter la8, la10, ..., la20
+```{r}
+level = 4
+filter <- "la8"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+```{r}
+level = 4
+filter <- "la10"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+```{r}
+level = 4
+filter <- "la20"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+##filter bl14, bl18, bl20
+```{r}
+level = 4
+filter <- "bl14"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+```{r}
+level = 4
+filter <- "bl18"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+```{r}
+level = 4
+filter <- "bl20"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+##filter c6, c12, ..., c30
+```{r}
+level = 4
+filter <- "c6"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+```{r}
+level = 4
+filter <- "c12"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+```{r}
+level = 4
+filter <- "c30"
+y <- repr_dwt(monSignal,level=level,filter = filter)
+plot(y)
+```
+#Exponential smoothing seasonal coefficients as representation
+
+References : 
+Laurinec P, Lucka M (2016) Comparison of representations of time series for clustering smart meter
+data. In: Lecture Notes in Engineering and Computer Science: Proceedings of The World Congress
+on Engineering and Computer Science 2016, pp 458-463
+Laurinec P, Loderer M, Vrablecova P, Lucka M, Rozinajova V, Ezzeddine AB (2016) Adaptive
+time series forecasting of energy consumption using optimized cluster analysis. In: Data Mining
+Workshops (ICDMW), 2016 IEEE 16th International Conference on, IEEE, pp 398-405
+
+```{r}
+freq <- 100
+y <- repr_exp(monSignal,freq)
+plot(y)
+```
+Prérequis : Au moins 2 répétitions du signal.
+```{r}
+freq <- 100
+y <- repr_exp(c(monSignal,monSignal),freq)
+plot(y)
+```
+#FeaClip representation
+```{r}
+y <- repr_feaclip(monSignal)
+plot(y)
+```
+C'est une sorte de compresion RLE
+
+#FeaClipTrend representation of time series
+
+##sumC
+```{r}
+func <- sumC
+pieces <- 2L
+order <- 4L
+y<-repr_feacliptrend(x=monSignal, func=func,pieces=pieces,order=order)
+plot(y)
+```
+##maxC
+```{r}
+func <- maxC
+pieces <- 2L
+order <- 4L
+y<-repr_feacliptrend(x=monSignal, func=func,pieces=pieces,order=order)
+plot(y)
+```
+#FeaTrend representation of time series
+##sumC
+```{r}
+func <- sumC
+pieces <- 2L
+order <- 4L
+y<-repr_featrend(x=monSignal, func=func,pieces=pieces,order=order)
+plot(y)
+```
+##maxC
+```{r}
+func <- maxC
+pieces <- 2L
+order <- 4L
+y<-repr_featrend(x=monSignal, func=func,pieces=pieces,order=order)
+plot(y)
+```
+#GAM regression coefficients as representation
+```{r}
+y<-repr_gam(x=monSignal)
+plot(y)
+```
+Ne fonctionne pas !
+
+#Regression coefficients from linear model as representation
+
+##LM method
+```{r}
+method <- "lm"
+freq <- 1000
+y<- repr_lm(x=monSignal, method = method,freq=freq)
+plot(y)
+```
+
+##RLM method
+```{r}
+method <- "rlm"
+freq <- 1000
+y<- repr_lm(x=monSignal, method = method,freq=freq)
+plot(y)
+```
+Ne fonctionne pas car le signal n'est pas linéaire !
+
+##L1 method
+```{r}
+method <- "l1"
+freq <- 1000
+y<- repr_lm(x=monSignal, method = method,freq=freq)
+plot(y)
+```
+#Computation of matrix of representations from matrix of time series
+```{r}
+y<-repr_matrix(x=MarelCarnot, func = NULL, args = NULL, normalise = FALSE,
+func_norm = norm_z, windowing = FALSE, win_size = NULL)
+plot(y)
+
+```
+
+Ne fonctionne pas car le signal n'est pas linéaire !
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
 When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
