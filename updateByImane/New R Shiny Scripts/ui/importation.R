@@ -2,11 +2,11 @@ tabPanel(
   title = "Importation des fichiers",value="onglet1",
   sidebarPanel(
     
-    fileInput("file1", h4("Importer un fichier"),accept=c('text/csv', 'text/comma-separated-values,text/plain')),
+    fileInput("file", h4("Importer un fichier"),accept=c('text/csv', 'text/comma-separated-values,text/plain')),
     
     
-    fileInput("file", h4("Importer la gamme capteur (optionnel)"), accept=c('text/csv', 'text/comma-separated-values,text/plain')),
-    fileInput("file", h4("Importer le fichier de rotation des capteurs (optionnel)"),accept=c('text/csv', 'text/comma-separated-values,text/plain'))
+    fileInput("file2", h4("Importer la gamme capteur (optionnel)"), accept=c('text/csv', 'text/comma-separated-values,text/plain')),
+    fileInput("file3", h4("Importer le fichier de rotation des capteurs (optionnel)"),accept=c('text/csv', 'text/comma-separated-values,text/plain'))
     
     
   ),

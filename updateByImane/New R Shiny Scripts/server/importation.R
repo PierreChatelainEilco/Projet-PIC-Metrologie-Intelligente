@@ -1,15 +1,14 @@
+#fichier de données 
 globalfile <- NULL
-
-filedata <- reactive({
-  inFile <- input$file1
-  if (is.null(inFile)) {
+ filedata <- reactive({
+   inFile <- input$file
+   if (is.null(inFile)) {
     # User has not uploaded a file yet
-    return(NULL)
-  }
-  globalfile <<- read.csv(inFile$datapath, as.is=TRUE)
-  return(NULL)
+     return(NULL)
+   }
+   globalfile <<- read.csv(inFile$datapath, as.is=TRUE)
+   return(NULL)
 })
-
 
 #This previews the CSV data file
 output$table <- renderTable({
@@ -17,11 +16,11 @@ output$table <- renderTable({
   globalfile
 })
 
+
 observeEvent(input$suivant, {
   updateNavbarPage(session,"uHMM",
                    selected = "onglet2")
   output$table2 <- renderTable({
-    globalfile
+    globalfile <-input$dataset
   })
-  
 })
