@@ -10,11 +10,9 @@ globalfile <- NULL
    return(NULL)
 })
 
+
 #This previews the CSV data file
-output$table <- renderTable({
-  call.me = filedata()
-  globalfile
-})
+ 
 
 
 observeEvent(input$suivant, {
@@ -23,4 +21,17 @@ observeEvent(input$suivant, {
   output$table2 <- renderTable({
     globalfile <-input$dataset
   })
+})
+
+#if( Valeurs manquantes/Valeurs aberrantes){ 
+observeEvent(input$afficherTab, {
+  showModal(modalDialog(
+    output$table <- renderTable({
+      call.me = filedata()
+      globalfile
+    }),
+    title = "Aperçu",
+    footer = modalButton("Quitter")
+  )
+  )
 })

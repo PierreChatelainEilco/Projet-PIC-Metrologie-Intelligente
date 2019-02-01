@@ -42,7 +42,7 @@ tabPanel(title ="M\UE9trologie",value="onglet2",
            #h3(htmlOutput("caption")),
            uiOutput("plot"), # depends on input
            basicPage(
-                  actionButton("popup", "Correction")
-                )
+             actionButton("popup", "Correction")
+           )
          )
 )  

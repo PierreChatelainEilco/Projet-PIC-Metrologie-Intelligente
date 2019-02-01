@@ -6,15 +6,19 @@ tabPanel(
     
     
     fileInput("file2", h4("Importer la gamme capteur (optionnel)"), accept=c('text/csv', 'text/comma-separated-values,text/plain')),
-    fileInput("file3", h4("Importer le fichier de rotation des capteurs (optionnel)"),accept=c('text/csv', 'text/comma-separated-values,text/plain'))
+    fileInput("file3", h4("Importer le fichier de rotation des capteurs (optionnel)"),accept=c('text/csv', 'text/comma-separated-values,text/plain')),
     
+    basicPage(
+      actionButton('afficherTab', 'Aperçu',
+                   class = "btn-primary",
+                   compound="center"
+      )
     
-  ),
+  )),
   mainPanel(
-    tableOutput("table"),
     
     
-    tabsetPanel(id="inTabset",
+      tabsetPanel(id="inTabset",
                 tabPanel(title = "Besoin d'aide ?", h4("Important : comment importer vos donn\UE9\U65s en 8 \UE9tapes"),
                          br(),
                          p("Les donn\UE9\U65s doivent \UEAtre \UE9\U63hantillonn\UE9\U65s \UE0 pas constant"),
@@ -28,5 +32,7 @@ tabPanel(
                 )
                 
     )
-  ), actionButton('suivant', 'Suivant', class = "btn-primary", compound="center")
+  ), 
+  actionButton('suivant', 'Suivant', compound="center")
+  
 )
