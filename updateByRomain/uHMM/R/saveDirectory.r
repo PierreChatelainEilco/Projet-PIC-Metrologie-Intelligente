@@ -37,4 +37,10 @@
   }
   assign("rfilesOutput",paste(theDirectory,tm$rfilesRepertoryLabel,sep=""),envir=uHMMenv) #sortieFichiersR
   
+  #Repertoire métrologie
+  if (dir.exists(paste(theDirectory,tm$metrologyRepertoryLabel,sep=""))==0){
+    dir.create(path=paste(theDirectory,tm$metrologyRepertoryLabel,sep=""), recursive = TRUE)
+  }
+  assign("metrologyOutput",paste(theDirectory,tm$metrologyRepertoryLabel,sep=""),envir=uHMMenv) #sortieFigures
+  
 }

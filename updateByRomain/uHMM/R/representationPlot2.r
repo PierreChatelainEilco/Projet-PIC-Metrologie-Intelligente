@@ -84,25 +84,43 @@
       if (tclvalue(tkcurselection(varList))!="")
       {
         #Recherche du parametre selectionne
-        selection<-as.numeric(tkcurselection(varList))+1
-        
-        tempSelect<-varNames[selection]
-        
-        Dmin<-paste(substring(tclvalue(tkget(laDateMin)),9,10),"/",substring(tclvalue(tkget(laDateMin)),6,7),"/",substring(tclvalue(tkget(laDateMin)),1,4),sep="")
-        Dmax<-paste(substring(tclvalue(tkget(laDateMax)),9,10),"/",substring(tclvalue(tkget(laDateMax)),6,7),"/",substring(tclvalue(tkget(laDateMax)),1,4),sep="")
-        
-        periodMin<-as.numeric(chron(Dmin,tclvalue(tkget(lHeureMin)),format=c("d/m/y","h:m:s")))
-        periodMax<-as.numeric(chron(Dmax,tclvalue(tkget(lHeureMax)),format=c("d/m/y","h:m:s")))
-        
-        periodIndex=(rawMoments>=periodMin & rawMoments<=periodMax);
-        period<-rawMoments[periodIndex]
+        # selection<-as.numeric(tkcurselection(varList))+1
+        # 
+        # tempSelect<-varNames[selection]
+        # 
+        # Dmin<-paste(substring(tclvalue(tkget(laDateMin)),9,10),"/",substring(tclvalue(tkget(laDateMin)),6,7),"/",substring(tclvalue(tkget(laDateMin)),1,4),sep="")
+        # Dmax<-paste(substring(tclvalue(tkget(laDateMax)),9,10),"/",substring(tclvalue(tkget(laDateMax)),6,7),"/",substring(tclvalue(tkget(laDateMax)),1,4),sep="")
+        # 
+        # periodMin<-as.numeric(chron(Dmin,tclvalue(tkget(lHeureMin)),format=c("d/m/y","h:m:s")))
+        # periodMax<-as.numeric(chron(Dmax,tclvalue(tkget(lHeureMax)),format=c("d/m/y","h:m:s")))
+        # 
+        # periodIndex=(rawMoments>=periodMin & rawMoments<=periodMax);
+        # period<-rawMoments[periodIndex]
   
         
         affichage.fun <- function()
         {
-          #plot(rawData[,tempSelect]~chron(period),ylab="Level",xlab="Date",main=tempSelect)
+          #Méthode avec R seul
+          
+         #A=cbind(rawData[,tempSelect],dataCorrige[,tempSelect])
+          A=cbind(1:120000)
+          matplot(A)
+          
+          
+          #plot(rawData[,tempSelect]~chron(period),ylab="Level",xlab="Date")
           #points(dataCorrige[,tempSelect]~chron(period),col="red",pch=3)
-          plot(dataCorrige[,tempSelect]~chron(period))
+          #Error : Unable to save metafile to the clipboard
+          
+          #Méthode avec plotly
+          #plot(dataCorrige[,tempSelect]~chron(period))
+          #p<-plot_ly(dataCorrige,x=~tempSelect)
+          #Pas compatible avec rplot mais compatible avec shiny
+          
+          #Méthode avec ggplot2
+          #gg <- ggplot(dataCorrige,aes(x="Dates",y=tempSelect)) + geom_point()
+          #print(gg)
+          #Error : Unable to save metafile to the clipboard
+        
         }
         
         myPlot<-tkrplot(plotWindow,hscale=2.5,vscale=2,affichage.fun)

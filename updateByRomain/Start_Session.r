@@ -1,7 +1,7 @@
 library(uHMM);
 
 # Charger les bibliotheques
-paquets=c("tcltk","tcltk2","tkrplot", "HMM", "clValid", "class", "cluster","FactoMineR", "corrplot", "chron");
+paquets=c("tcltk","tcltk2","tkrplot", "HMM", "clValid", "class", "cluster","FactoMineR", "corrplot", "chron","ggplot2");
 for(paquet in paquets)
 {
   library(paquet,character.only = T);
@@ -15,4 +15,3 @@ for(fichier in fichiers)
   source(fichier);
 }
 uHMMinterface()
-

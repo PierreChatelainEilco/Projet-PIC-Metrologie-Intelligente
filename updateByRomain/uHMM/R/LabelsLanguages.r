@@ -8,7 +8,7 @@
 .languageManagement<-function(language){
   
   id<-c(
-    "mainWindowTitle","overviewIntro","overviewTabLabel","importTabLabel","metrologyTabLabel","variableTabLabel","classificationTabLabel","modelingTabLabel","predictionTabLabel","titleScheme","importScheme","metrologyScheme","variableScheme","classificationScheme","modelingScheme","predictionScheme","titleEquipment","textEquipment","titleLanguageLabel","englishLabel","frenchLabel","titleUserLabel","standardLabel","expertLabel","startLabel","importTxtLabel","importTxtGamme","importTxtRotation","titleImportFrame","textImportFrame","titleNextFrame","noFileMsg","noDirectoryMsg","warningLabel","titleDirectoryWindow","directoryButtonLabel","summaryLabel","fixDataLabel","autocorrection","fixedInFileName","titleParamList","allParamLabel","noParamMsg","titleExploratoryFrame","datasetVariableListTitle","modelVariableListTitle","titlePlotWindow","plotButtonLabel","boxplotButtonLabel","displayButtonLabel","titlePcaCircle","dimensionWarning","correlationButtonLabel","pcaLabel","twoParamsWarning","titleBoxplotWindow","titlePeriodFrame","fromLabel","toLabel","yesLabel","noLabel","runLabel","corrplotGlobalTitle","corrplotTitle","completeObservations","selectedVariables","selectedPeriodFrom","toMinLabel","textClassificationDefault","normalizationFrameTitle","normalizationFrameText","selectMethodTitle","KmeansLabel","SpectralLabel","SpectralAdviceLabel","vectorialQuantization","explainedVariance","stateNumberLabel","autoStateNumberLabel","stopCriteriaLabel","principalEigenValueLabel","gapLabel","classificationResultsButtonLabel","titleClassifImportFrame","textClassifImportFrame","titleClassifResultsWindow","textClassifResultsWindow","titleClassifWarning","textClassifWarning","textEstimateMMCWindow","titleEstimateMMCWindow","titleProgramIsOverWindow","textProgramIsOverWindow","textVarianceErrorWindow","titleVarianceErrorWindow","textModelingResultsWindow","titleModelingResultsWindow","modelingResultsButtonLabel","titleModelingImportFrame","textModelingImportFrame","importPredictionTxtLabel","titleImportPredictionFrame","textImportPredictionFrame","RunPredictionButtonLabel","textPredictionResultsWindow","titlePredictionResultsWindow","seqClassifTitle","seqClassifFileTitle","seqModelTitle","CstepNormalization","CstepFastSpectralJordan","CstepComputingK","CstepSymbols","CstepSaving","CstepDone","CstepGraphics","CstepDuration","secondsLabel","CstepVariables","CstepObservations","CstepNAnumber","CstepDetectedStates","CstepKmeansHW","CstepClassifResults","VstepNA","IstepColumns","IstepRows","IstepIncompleteRows","IstepNA","IstepFixedPath","MstepStates","MstepSymbols","MstepDuration","MstepAssignSymbols","MstepViterbi","MstepEstimateModel","MstepDone","PstepAssignSymbols","PstepViterbi","PstepGraphics","PstepDone","seqFileJPG","seqPredictionTitle","selectedRawDataRepertory","outOfLabel","nbPrototypesLabel","nbGroupsInSamplesLabel","computeMNCUTLabel","computeSilLabel","diagramsRepertoryLabel","tablesRepertoryLabel","rfilesRepertoryLabel","titlePeriodFrame2","overallNA","MstepParameterEstimation","PstepModelingWarning","MstepClassificationWarning","IstepImportExample","IstepImportSensorExample","confirmLabel","confirmCloseMsg","confirmResetMsg"
+    "mainWindowTitle","overviewIntro","overviewTabLabel","importTabLabel","metrologyTabLabel","variableTabLabel","classificationTabLabel","modelingTabLabel","predictionTabLabel","titleScheme","importScheme","metrologyScheme","variableScheme","classificationScheme","modelingScheme","predictionScheme","titleEquipment","textEquipment","titleLanguageLabel","englishLabel","frenchLabel","titleUserLabel","standardLabel","expertLabel","startLabel","importTxtLabel","importTxtGamme","importTxtRotation","titleImportFrame","textImportFrame","titleNextFrame","noFileMsg","noDirectoryMsg","warningLabel","titleDirectoryWindow","directoryButtonLabel","summaryLabel","fixDataLabel","autocorrection","graphBouton","meth1correction","meth2correction","fixedInFileName","titleParamList","allParamLabel","noParamMsg","titleExploratoryFrame","datasetVariableListTitle","modelVariableListTitle","titlePlotWindow","plotButtonLabel","boxplotButtonLabel","displayButtonLabel","titlePcaCircle","dimensionWarning","correlationButtonLabel","pcaLabel","twoParamsWarning","titleBoxplotWindow","titlePeriodFrame","fromLabel","toLabel","yesLabel","noLabel","runLabel","corrplotGlobalTitle","corrplotTitle","completeObservations","selectedVariables","selectedPeriodFrom","toMinLabel","textClassificationDefault","normalizationFrameTitle","normalizationFrameText","selectMethodTitle","KmeansLabel","SpectralLabel","SpectralAdviceLabel","vectorialQuantization","explainedVariance","stateNumberLabel","autoStateNumberLabel","stopCriteriaLabel","principalEigenValueLabel","gapLabel","classificationResultsButtonLabel","titleClassifImportFrame","textClassifImportFrame","titleClassifResultsWindow","textClassifResultsWindow","titleClassifWarning","textClassifWarning","textEstimateMMCWindow","titleEstimateMMCWindow","titleProgramIsOverWindow","textProgramIsOverWindow","textVarianceErrorWindow","titleVarianceErrorWindow","textModelingResultsWindow","titleModelingResultsWindow","modelingResultsButtonLabel","titleModelingImportFrame","textModelingImportFrame","importPredictionTxtLabel","titleImportPredictionFrame","textImportPredictionFrame","RunPredictionButtonLabel","textPredictionResultsWindow","titlePredictionResultsWindow","seqClassifTitle","seqClassifFileTitle","seqModelTitle","CstepNormalization","CstepFastSpectralJordan","CstepComputingK","CstepSymbols","CstepSaving","CstepDone","CstepGraphics","CstepDuration","secondsLabel","CstepVariables","CstepObservations","CstepNAnumber","CstepDetectedStates","CstepKmeansHW","CstepClassifResults","VstepNA","IstepColumns","IstepRows","IstepIncompleteRows","IstepNA","IstepFixedPath","MstepStates","MstepSymbols","MstepDuration","MstepAssignSymbols","MstepViterbi","MstepEstimateModel","MstepDone","PstepAssignSymbols","PstepViterbi","PstepGraphics","PstepDone","seqFileJPG","seqPredictionTitle","selectedRawDataRepertory","outOfLabel","nbPrototypesLabel","nbGroupsInSamplesLabel","computeMNCUTLabel","computeSilLabel","diagramsRepertoryLabel","tablesRepertoryLabel","rfilesRepertoryLabel","metrologyRepertoryLabel","titlePeriodFrame2","overallNA","MstepParameterEstimation","PstepModelingWarning","MstepClassificationWarning","IstepImportExample","IstepImportSensorExample","confirmLabel","confirmCloseMsg","messageBox","confirmResetMsg"
   )
   
   if(language=="en"){
@@ -50,8 +50,11 @@
       "Choose a save directory, then click OK.",
       "Select your save directory",
       "Summary",
-      "Fix Data",
-      "Auto-Detection",
+      "Detection",
+      "Auto-correction",
+      "Display graph",
+      "Correction Method 1",
+      "Correction Method 2",
       "_fixed",
       "Variable selection",
       "- All variables -",
@@ -165,6 +168,7 @@
       "/Diagrams/",
       "/Tables/",
       "/Rfiles/",
+      "/Metrology/",
       "Prediction period selection",
       "complete observations if all variables are taken",
       "Estimation of transition and emission matrices ...",
@@ -174,6 +178,7 @@
       "Import the example dataset",
       "Confirm close",
       "Are you sure you want to close the interface?",
+      "Would you like to accept the correction and save?",
       "Are you sure you want to reset the interface?"
     )
   }
@@ -219,6 +224,9 @@
       "R\UE9sum\UE9",
       "Detection",
       "Auto-Correction",
+      "Afficher le graphe",
+      "Methode de Correction 1",
+      "Methode de Correction 2",
       "_corrige",
       "S\UE9lection des variables ",
       "- Toutes les variables -",
@@ -332,6 +340,7 @@
       "/Figures/",
       "/Tableaux/",
       "/FichiersR/",
+      "/M\UE9trologie/",
       "S\UE9lection de la p\UE9riode \UE0 pr\UE9\U64ire ",
       "observations compl\UE8tes si toutes les variables sont prises",
       "Estimation des matrices de transition et d'\UE9mission ...",
@@ -341,6 +350,7 @@
       "Importer le jeu de donn\UE9\U65s d'exemple (Gamme Capteur)",
       "Confirmer la fermeture",
       "\UCAtes-vous s\UFBr de vouloir fermer l'interface ?",
+      "Voulez-vous accepter la correction et sauvegarder ?",
       "\UCAtes-vous s\UFBr de vouloir r\UE9initialiser l'interface ?"
     )
   }

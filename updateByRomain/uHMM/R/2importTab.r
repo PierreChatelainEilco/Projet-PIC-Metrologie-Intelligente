@@ -100,7 +100,7 @@
   # Directory selection
   directoryButton <- tk2button(win1$env$import,text=tm$directoryButtonLabel,image="save",compound = "left")
   directoryButton.fun <- function(){
-    .saveDirectory(win1$env$import, output="saveDirectory",tm=tm,uHMMenv=uHMMenv)#,fileName=firstDataFile,fixSumRow=5)
+    .saveDirectory(win1$env$import, output="saveDirectory",tm=tm,uHMMenv=uHMMenv)
   }
   tkconfigure(directoryButton, command=directoryButton.fun)
   tkgrid(directoryButton, column=0, row=8,sticky="w",padx=c(leftMargin,0))
