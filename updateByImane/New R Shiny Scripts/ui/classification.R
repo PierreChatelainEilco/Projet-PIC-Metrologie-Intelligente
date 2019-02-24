@@ -1,1 +1,6 @@
-tabPanel(title = "Classification",value="onglet5","dfgh")
+tabPanel(title = "Classification",value="onglet5",
+  #inputs
+  sidebarPanel(),
+  #outputs
+  mainPanel()
+)
