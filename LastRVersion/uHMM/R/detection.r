@@ -43,6 +43,6 @@
   infodata<- cbind(infodata,Outliers=outliers)
   recapNbVA<- infodata[,11]
   positions <- data.frame(positions)
-  .tkAfficherTableau2(recapNbVA,nbval=dim(uHMMenv$rawData)[1],title="Nombre Valeurs Aberrantes",messagebas="*Les valeurs abérantes sont les valeurs hors de l'interval [m-1.5(Q3-Q1), m+1.5(Q3-Q1)]",messagehaut = paste("Nombre total de mesures : ",dim(uHMMenv$rawData)[1]))
+  .tkAfficherTableau2(recapNbVA,nbval=dim(uHMMenv$rawData)[1],title="Nombre Valeurs Aberrantes",messagebas="*Les valeurs abÃ©rantes sont les valeurs hors de l'interval [m-1.5(Q3-Q1), m+1.5(Q3-Q1)]",messagehaut = paste("Nombre total de mesures : ",dim(uHMMenv$rawData)[1]))
   
 }
