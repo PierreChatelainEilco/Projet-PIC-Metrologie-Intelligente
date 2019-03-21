@@ -23,7 +23,7 @@
     assign("rawMoments",dateProcessing(uHMMenv$rawData),envir=uHMMenv)
     assign("firstDataFile",imp$fileName,envir=uHMMenv)
     
-    #Décocher MarelCarnot
+    #DÃ©cocher MarelCarnot
     tclvalue(exampleSet) <- 0
   }
   tkconfigure(browseButton,command=browseButton.fun);
@@ -38,7 +38,7 @@
     assign("rawMoments",dateProcessing(uHMMenv$rawData),envir=uHMMenv)
     assign("firstDataFile",imp$fileName,envir=uHMMenv)
     
-    #Décocher MarelCarnot
+    #D?cocher MarelCarnot
     tclvalue(exampleSet1) <- 0
   }
   tkconfigure(browseButton,command=browseButton.fun);
@@ -65,7 +65,7 @@
       assign("rawData",MarelCarnot,envir=uHMMenv)
       assign("rawMoments",dateProcessing(uHMMenv$rawData),envir=uHMMenv)
     }else if(exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
-      #Afficher le jeu de donnees va être remplacer par MarelCarnot
+      #Afficher le jeu de donnees va ?tre remplacer par MarelCarnot
       assign("firstDataFile","MarelCarnot",uHMMenv)
       assign("rawData",MarelCarnot,envir=uHMMenv)
       assign("rawMoments",dateProcessing(uHMMenv$rawData),envir=uHMMenv)
@@ -86,7 +86,7 @@
       assign("rawData",MarelCarnotSensor,envir=uHMMenv)
       assign("rawMoments",dateProcessing(uHMMenv$rawData),envir=uHMMenv)
     }else if(exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
-      #Afficher le jeu de donnees va être remplacer par MarelCarnot
+      #Afficher le jeu de donnees va ?tre remplacer par MarelCarnot
       assign("firstDataFile","MarelCarnotSensor",uHMMenv)
       assign("rawData",MarelCarnotSensor,envir=uHMMenv)
       assign("rawMoments",dateProcessing(uHMMenv$rawData),envir=uHMMenv)
@@ -121,6 +121,25 @@
   tkconfigure(summaryButton,command=summaryButton.fun)
   tkgrid(summaryButton,row=12,column=0)
   
+  #Creation du bouton pour gÃ©nÃ©rer un raport sur les donnÃ©e brute
+  reportButton<-tk2button(win1$env$import,text="Report",image="fix",compound ="left")
+  reportButton.fun <- function(){
+    if(!exists("rawData",where=uHMMenv)){
+      tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
+    }else if(!exists("saveDirectory",where=uHMMenv)){
+      tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
+    }else{
+      print(head(uHMMenv$rawData))
+      print(head(uHMMenv$rawMoments))
+      print(uHMMenv$firstDataFile)
+      print(tm$language)
+      print(uHMMenv$diagramsOutput)
+      print(uHMMenv$reportsOutput)
+    }
+  }
+  tkconfigure(reportButton,command=reportButton.fun)
+  tkgrid(reportButton,row=12,column=1)
+  
   #Creation du bloc precisant ce que l'on veut comme fichier TXT
   AdviceFrame <- tkwidget(win1$env$import,"labelframe",text=tm$titleImportFrame,padx=30,pady=8, relief = "groove") # cadre de texte
   tkgrid(AdviceFrame, columnspan=3, row=10, sticky="w",padx=c(leftMargin,0),pady=c(10,10))
@@ -138,7 +157,7 @@
   metrologyButton.fun <- function(){
     if(!exists("rawData",where=uHMMenv)){
       tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
-    }else if(uHMMenv$saveDirectory==""){
+    }else if(!exists("saveDirectory",where=uHMMenv)){
       tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
     }else{
       .metrologyTab(leftMargin=leftMargin,userType=userType,tm=tm,

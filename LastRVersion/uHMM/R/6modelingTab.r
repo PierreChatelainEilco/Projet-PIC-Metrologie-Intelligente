@@ -14,12 +14,14 @@
                       console,graphicFrame,win1,uHMMenv){
   
   #Mise en place du bouton pour rechercher resultats classification
-  importClassifButton<-tk2button(win1$env$modelisation,text=tm$classificationResultsButtonLabel,image="import",compound = "left",command=function(){
+  importClassifButton<-tk2button(win1$env$modelisation,text=tm$classificationResultsButtonLabel,image="import",compound = "left")
+  importClassifButton.fun<-function(){
     .importResults(noFileMsg=tm$noFileMsg,win1=win1,tab=win1$env$modelisation,envir=uHMMenv)
     trainingSet<-uHMMenv$rawData[uHMMenv$trainingRows,uHMMenv$selectedNames]
     assign("trainingPeriod",uHMMenv$rawMoments[uHMMenv$trainingRows],envir=uHMMenv)
     assign("trainingSet",trainingSet,envir=uHMMenv)
-  })
+  }
+  tkconfigure(importClassifButton,command=importClassifButton.fun)
   tkgrid(importClassifButton,row=1,column=0,sticky="w",padx=c(leftMargin,0),pady=c(20,0))
   
   
@@ -34,7 +36,8 @@
   
   #Creation du bouton de validation du fichier demande
   
-  runButton<-tk2button(win1$env$modelisation,text=tm$runLabel,image="run",compound = "left",command=function(){
+  runButton<-tk2button(win1$env$modelisation,text=tm$runLabel,image="run",compound = "left")
+  runButton.fun<-function(){
 
     if(!exists("nbSymbols",where=uHMMenv)){
       
@@ -117,7 +120,8 @@
       
     }
     
-  })
+  }
+  tkconfigure(runButton,command=runButton.fun)
   tkgrid(runButton,row=7,column=0,padx=c(leftMargin,0),pady=c(10,10),sticky="w")
   
   

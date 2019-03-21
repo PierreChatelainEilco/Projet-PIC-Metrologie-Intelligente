@@ -19,7 +19,7 @@
     .detection(uHMMenv)
   }
   tkconfigure(fixButton,command=fixButton.fun)
-  tkgrid(fixButton,row=3,column=3)
+  tkgrid(fixButton,row=3,column=2)
   
   #mode classique
   if (userType == "default")
@@ -35,7 +35,7 @@
         .representationPlot3(uHMMenv$rawMoments,uHMMenv$rawData,uHMMenv$dataCorrige,tm,"Graphique")
       }
       tkconfigure(graphButton,command=graphButton.fun);
-      tkgrid(graphButton,row=12,column=2)
+      tkgrid(graphButton,row=12,column=1)
       
       summaryButton<-tk2button(win1$env$metrology,text=tm$summaryLabel,image="loupe",compound = "left")
       summaryButton.fun <-function()
@@ -57,10 +57,10 @@
         }
       }
       tkconfigure(summaryButton,command=summaryButton.fun)
-      tkgrid(summaryButton,row=12,column=4)
+      tkgrid(summaryButton,row=12,column=3)
     }
     tkconfigure(browseButton,command=browseButton.fun);
-    tkgrid(browseButton,row=8,column=3)
+    tkgrid(browseButton,row=8,column=2)
   }
   
   #Mode expert
@@ -95,11 +95,11 @@
         .representationPlot3(uHMMenv$rawMoments,uHMMenv$rawData,uHMMenv$dataCorrige,tm,"Graphique")
       }
       tkconfigure(graphButton,command=graphButton.fun);
-      tkgrid(graphButton,row=12,column=2)
+      tkgrid(graphButton,row=12,column=1)
   
     }
     tkconfigure(browse1Button,command=browse1Button.fun);
-    tkgrid(browse1Button,row=9,column=2)
+    tkgrid(browse1Button,row=9,column=1)
     
     browse2Button<-tk2button(win1$env$metrology,text=tm$meth2correction,image="data",compound = "left")
     browse2Button.fun <- function(){
@@ -163,7 +163,7 @@
         .representationPlot3(uHMMenv$rawMoments,uHMMenv$rawData,uHMMenv$dataCorrige,tm,"Graphique")
       }
       tkconfigure(graphButton,command=graphButton.fun);
-      tkgrid(graphButton,row=12,column=4)
+      tkgrid(graphButton,row=12,column=3)
       
       
       summaryButton<-tk2button(win1$env$metrology,text=tm$summaryLabel,image="loupe",compound = "left")
@@ -190,7 +190,7 @@
 
   # Next tab
   nextTabFrame <- tkwidget(win1$env$metrology,"labelframe",text=tm$titleNextFrame,borderwidth = 0)
-  tkgrid(nextTabFrame,column=0,row=20,padx=c(leftMargin,0),pady=c(50,0),sticky="w")
+  tkgrid(nextTabFrame,column=1,row=20,padx=c(leftMargin,0),pady=c(50,0),sticky="w")
 
   classifButton<-tk2button(nextTabFrame,text=tm$classificationTabLabel,image="run",compound = "left")
   classifButton.fun<-function(){
@@ -252,7 +252,7 @@
     }
   }
   tkconfigure(classifButton,command=classifButton.fun)
-  tkgrid(classifButton,row=21,column=0)
+  tkgrid(classifButton,row=21,column=1)
 
 
   modelingButton<-tk2button(nextTabFrame,text=tm$modelingTabLabel,image="run",compound = "left")
@@ -315,7 +315,7 @@
     }
   }
   tkconfigure(modelingButton,command=modelingButton.fun)
-  tkgrid(modelingButton,row=22,column=0)
+  tkgrid(modelingButton,row=22,column=1)
 
 
   predictButton<-tk2button(nextTabFrame,text=tm$predictionTabLabel,image="run",compound = "left")
@@ -391,7 +391,7 @@
     }
   }
   tkconfigure(predictButton,command=predictButton.fun)
-  tkgrid(predictButton,row=23,column=0)
+  tkgrid(predictButton,row=23,column=1)
   
-  tkgrid(tklabel(win1$env$metrology, text="      "), column=0, row=23)
+  tkgrid(tklabel(win1$env$metrology, text="      "), column=1, row=23)
 }

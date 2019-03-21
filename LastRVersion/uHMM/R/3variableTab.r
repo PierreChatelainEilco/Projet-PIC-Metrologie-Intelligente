@@ -29,9 +29,7 @@
                           background="white")
   paramNames<-c(tm$allParamLabel,colnames(uHMMenv$rawData)[3:length(uHMMenv$rawData)]);
   for(i in 1:length(paramNames)){
-    
     tkinsert(dataVarList,"end",paramNames[i])
-    
   }
   
   tkselection.set(dataVarList, 0)  
@@ -102,7 +100,8 @@
   
   tkgrid(tklabel(arrowFrame, text="                  "))
   
-  removeButton <- tk2button(arrowFrame ,text="<=", command=function() {    # bouton de deselection    image=imgArrowleft
+  removeButton <- tk2button(arrowFrame ,text="<=")
+  removeButton.fun <- function(){    # bouton de deselection    image=imgArrowleft
     
     #Verification qu'une valeur est selectionnee
     if (tclvalue(tkcurselection(modelVarList))!="") {
@@ -145,7 +144,8 @@
       
       
     } else { tkmessageBox(message=tm$noParamMsg,type="ok",icon="info", title=tm$warningLabel) } #On avertit l'utilisateur qu'aucun parametre n'est selectionne
-  })
+  }
+  tkconfigure(removeButton,command=removeButton.fun)
   tkgrid(removeButton)
   
   
@@ -158,7 +158,8 @@
   
   
   #Bouton de plot
-  plotButton<-tk2button(exploratoryFrame,text=tm$plotButtonLabel,image="loupe",compound = "left",command=function(){
+  plotButton<-tk2button(exploratoryFrame,text=tm$plotButtonLabel,image="loupe",compound = "left")
+  plotButton.fun<-function(){
     
     if(length(uHMMenv$selectedNames)!=0){  #Verification que des parametres ont ete selectionnes
       
@@ -180,13 +181,15 @@
       tkmessageBox(message=tm$noParamMsg,type="ok",icon="info", title=tm$warningLabel)
       
     }
-  })
+  }
+  tkconfigure(plotButton,command=plotButton.fun)
   tkgrid(plotButton,row=1,column=1,padx=c(25,10),pady=c(5,5))
   
   
   
   #Bouton de boxplot
-  boxplotButton<-tk2button(exploratoryFrame,text=tm$boxplotButtonLabel,image="loupe",compound = "left",command=function(){
+  boxplotButton<-tk2button(exploratoryFrame,text=tm$boxplotButtonLabel,image="loupe",compound = "left")
+  boxplotButton.fun<-function(){
     
     if(length(uHMMenv$selectedNames)!=0){  #Verification que des parametres ont ete selectionnes
       
@@ -209,8 +212,8 @@
       tkmessageBox(message=tm$noParamMsg,type="ok",icon="info", title=tm$warningLabel)
       
     }
-  })
-  
+  }
+  tkconfigure(boxplotButton, command=boxplotButton.fun)
   tkgrid(boxplotButton,row=1,column=2,padx=10,pady=c(5,5))
   
   
@@ -218,7 +221,8 @@
   
   
   #Bouton correlation
-  corrButton<-tk2button(exploratoryFrame,text=tm$correlationButtonLabel,image="loupe",compound = "left",command=function(){
+  corrButton<-tk2button(exploratoryFrame,text=tm$correlationButtonLabel,image="loupe",compound = "left")
+  corrButton.fun<-function(){
     
       M<-cor(uHMMenv$rawData[,-which(colnames(uHMMenv$rawData)=="Hours"| colnames(uHMMenv$rawData)=="Dates")],use="pairwise.complete.obs")
       
@@ -227,14 +231,16 @@
       cor3<-tkrplot(cor3win,hscale=2.5,vscale=2,function()corrplot(M, method="number"))
       tkgrid(cor3,row=0,column=1,sticky="w")
     
-  })
+  }
+  tkconfigure(corrButton,command=corrButton.fun)
   tkgrid(corrButton,row=1,column=3,padx=10,pady=c(5,5))
   
   
   
   
   #Bouton de l'ACP
-  PCAbutton<-tk2button(exploratoryFrame,text=tm$pcaLabel,image="loupe",compound = "left",command=function(){
+  PCAbutton<-tk2button(exploratoryFrame,text=tm$pcaLabel,image="loupe",compound = "left")
+  PCAbutton.fun<-function(){
     
     if(length(uHMMenv$selectedNames)!=0){  #Verification que des parametres ont ete selectionnes
       if(length(uHMMenv$selectedNames)>=2){
@@ -262,7 +268,8 @@
     }
     
     
-  })
+  }
+  tkconfigure(PCAbutton,command=PCAbutton.fun)
   tkgrid(PCAbutton,row=1,column=4,padx=c(10,25),pady=c(5,5))
   
   
@@ -327,7 +334,8 @@
   
   
   
-  boutonValider<-tk2button(win1$env$variables,text=tm$runLabel,image="run",compound = "left",command=function(){
+  boutonValider<-tk2button(win1$env$variables,text=tm$runLabel,image="run",compound = "left")
+  boutonValider.fun<-function(){
     
     if(length(uHMMenv$selectedNames)!=0){  #Verification que des parametres ont ete selectionnes
       if(length(uHMMenv$selectedNames)>=2){
@@ -386,19 +394,10 @@
       
     }
     
-  })
+  }
+  tkconfigure(boutonValider,command=boutonValider.fun)
   
   tkgrid(tklabel(win1$env$variables, text="      "), column=0, row=17)
   
   tkgrid(boutonValider,row=18,sticky="w",padx=c(leftMargin,0))
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 }

@@ -25,7 +25,8 @@
   tkgrid(tk2label(AdviceFrame, text=tm$textModelingImportFrame), sticky="w")
   
   #Mise en place du bouton pour importer nouvelles donnees
-  importDataPredButton<-tk2button(win1$env$prediction,text=tm$importPredictionTxtLabel,image="data",compound = "left",command=function(){
+  importDataPredButton<-tk2button(win1$env$prediction,text=tm$importPredictionTxtLabel,image="data",compound = "left")
+  importDataPredButton.fun<-function(){
     
       imp<-.importFile(win1$env$prediction,dispFileRow=3,fixSumRow=5,tm=tm,console=console,win1=win1)  # import donneesBrutesAPredire
       assign("rawValidData",imp$impData,envir=uHMMenv)
@@ -34,11 +35,13 @@
       
       .periodSelectionFrame(data=uHMMenv$rawValidData,tm=tm,
                            leftMargin=leftMargin,uHMMenv=uHMMenv,win1=win1)
-    })
+  }
+  tkconfigure(importDataPredButton,command=importDataPredButton.fun)
   tkgrid(importDataPredButton,row=3,column=0,sticky="w",padx=c(leftMargin,0))  
 
   # Fix button
-  fixButton<-tk2button(win1$env$prediction,text=tm$fixDataLabel,image="fix",compound = "left",command=function(){
+  fixButton<-tk2button(win1$env$prediction,text=tm$fixDataLabel,image="fix",compound = "left")
+  fixButton.fun<-function(){
     
     if(!exists("rawValidData",where=uHMMenv)){
       
@@ -51,11 +54,13 @@
       assign("ValidDataFile",fixedData$newFileName,envir=uHMMenv)
       
     }
-  })
+  }
+  tkconfigure(fixButton,command=fixButton)
   tkgrid(fixButton,row=5,column=1)
 
   # Summary button
-  summaryButton<-tk2button(win1$env$prediction,text=tm$summaryLabel,image="loupe",compound = "left",command=function(){
+  summaryButton<-tk2button(win1$env$prediction,text=tm$summaryLabel,image="loupe",compound = "left")
+  summaryButton.fun<-function(){
   
    if(!exists("rawValidData",where=uHMMenv)){
     
@@ -68,7 +73,8 @@
        .unSummary(uHMMenv$rawValidData,summaryLabel=tm$summaryLabel)
      }
    }
-  })
+  }
+  tkconfigure(summaryButton,command=summaryButton.fun)
   tkgrid(summaryButton,row=5,column=0)
   
 
@@ -80,7 +86,8 @@
 
   
   #Creation du bouton de validation du fichier demande
-  runButton<-tk2button(win1$env$prediction,text=tm$RunPredictionButtonLabel,image="run",compound = "left",command=function(){
+  runButton<-tk2button(win1$env$prediction,text=tm$RunPredictionButtonLabel,image="run",compound = "left")
+  runButton.fun<-function(){
     if(!exists("rawValidData",envir = uHMMenv)){
       tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
     }
@@ -119,6 +126,7 @@
       tkmessageBox(message=tm$textPredictionResultsWindow,type="yesno",icon="info", title=tm$titlePredictionResultsWindow)
     }
     
-  })
+  }
+  tkconfigure(runButton,command=runButton.fun)
   tkgrid(runButton,row=8,column=0,sticky="w",padx=c(leftMargin,0),pady=c(10,10))
 }

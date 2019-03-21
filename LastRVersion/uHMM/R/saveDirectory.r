@@ -37,10 +37,16 @@
   }
   assign("rfilesOutput",paste(theDirectory,tm$rfilesRepertoryLabel,sep=""),envir=uHMMenv) #sortieFichiersR
   
-  #Repertoire métrologie
+  #Repertoire mÃ©trologie
   if (dir.exists(paste(theDirectory,tm$metrologyRepertoryLabel,sep=""))==0){
     dir.create(path=paste(theDirectory,tm$metrologyRepertoryLabel,sep=""), recursive = TRUE)
   }
   assign("metrologyOutput",paste(theDirectory,tm$metrologyRepertoryLabel,sep=""),envir=uHMMenv) #sortieFigures
+  
+  #Repertoire des rapports
+  if (dir.exists(paste(theDirectory,tm$reportsRepertoryLabel,sep=""))==0){
+    dir.create(path=paste(theDirectory,tm$reportsRepertoryLabel,sep=""), recursive = TRUE)
+  }
+  assign("reportsOutput",paste(theDirectory,tm$reportsRepertoryLabel,sep=""),envir=uHMMenv) #sortieFigures
   
 }
