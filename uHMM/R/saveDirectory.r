@@ -15,7 +15,7 @@
   assign(output,theDirectory,envir=uHMMenv); ### sortie<-theDirectory
   
   afficheDossier<-tklabel(dispTab,text=theDirectory)
-  tkgrid(afficheDossier,row=2,column=1,sticky="w")
+  tkgrid(afficheDossier,row=8,column=1,sticky="w")
   
   
   
