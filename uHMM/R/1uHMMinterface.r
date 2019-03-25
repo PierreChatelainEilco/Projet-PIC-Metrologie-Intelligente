@@ -23,17 +23,21 @@ uHMMinterface<-function(uHMMenv=NULL){
   languageBlock <- tkwidget(languageWindow,"labelframe",text=paste("Please select your language/\nVeuillez s",intToUtf8(0233),"lectionner votre langue",sep=""),borderwidth = 0)
   tkgrid(languageBlock,padx=c(100,100),pady=c(50,50),column=1,row=1) 
   
-  englishButton<-tkbutton(languageBlock,text="English/Anglais",compound = "left", command=function(){
+  englishButton<-tkbutton(languageBlock,text="English/Anglais",compound = "left")
+  englishButton.fun<-function(){
     tkdestroy(languageWindow)  
     .firstTab("en",uHMMenv,leftMargin=30,hscaleGraphicFrame=1.2,vscaleGraphicFrame=1.2)
-  })
+  }
+  tkconfigure(englishButton,command=englishButton.fun)
   tkgrid(englishButton,padx=20)
   
   
-  frenchButton<-tkbutton(languageBlock,text=paste("French/Fran",intToUtf8(0231),"ais",sep=""),compound = "left",command=function(){
+  frenchButton<-tkbutton(languageBlock,text=paste("French/Fran",intToUtf8(0231),"ais",sep=""),compound = "left")
+  frenchButton.fun<-function(){
     tkdestroy(languageWindow) 
     .firstTab("fr",uHMMenv,leftMargin=30,hscaleGraphicFrame=1.2,vscaleGraphicFrame=1.2)
-  })
+  }
+  tkconfigure(frenchButton,command=frenchButton.fun)
   tkgrid(frenchButton,padx=20)
 
   

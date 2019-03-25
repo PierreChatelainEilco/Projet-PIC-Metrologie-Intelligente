@@ -13,9 +13,11 @@
                         console,graphicFrame,win1,uHMMenv){
   
   #Mise en place du bouton pour rechercher resultats modelisation
-  importModelingButton<-tk2button(win1$env$prediction,text=tm$modelingResultsButtonLabel,image="import",compound = "left",command=function(){
+  importModelingButton<-tk2button(win1$env$prediction,text=tm$modelingResultsButtonLabel,image="import",compound = "left")
+  importModelingButton.fun<-function(){
     .importResults(noFileMsg=tm$noFileMsg,win1=win1,tab=win1$env$prediction,envir=uHMMenv)
-    })
+  }
+  tkconfigure(importModelingButton,command=importModelingButton.fun)
   tkgrid(importModelingButton,row=1,column=0,sticky="w",padx=c(leftMargin,0),pady=c(20,0))
   
   #Creation du bloc precisant ce que l'on veut comme fichier de resultats de modelisation
@@ -24,7 +26,8 @@
   tkgrid(tk2label(AdviceFrame, text=tm$textModelingImportFrame), sticky="w")
   
   #Mise en place du bouton pour importer nouvelles donnees
-  importDataPredButton<-tk2button(win1$env$prediction,text=tm$importPredictionTxtLabel,image="data",compound = "left",command=function(){
+  importDataPredButton<-tk2button(win1$env$prediction,text=tm$importPredictionTxtLabel,image="data",compound = "left")
+  importDataPredButton.fun<-function(){
     
       imp<-.importFile(win1$env$prediction,dispFileRow=3,fixSumRow=5,tm=tm,console=console,win1=win1)  # import donneesBrutesAPredire
       if(exists("imp")){
@@ -38,7 +41,8 @@
         tclvalue(checkReimport)<-0
         tkconfigure(importFirstDatasetB, variable = checkReimport)
       }
-    })
+  }
+  tkconfigure(importDataPredButton,command=importDataPredButton.fun)
   tkgrid(importDataPredButton,row=3,column=0,sticky="w",padx=c(leftMargin,0))  
   
   
@@ -64,7 +68,8 @@
 
   
   # Fix button
-  fixButton<-tk2button(win1$env$prediction,text=tm$fixDataLabel,image="fix",compound = "left",command=function(){
+  fixButton<-tk2button(win1$env$prediction,text=tm$fixDataLabel,image="fix",compound = "left")
+  fixButton.fun<-function(){
     
     if(!exists("rawValidData",where=uHMMenv)){
       
@@ -77,11 +82,13 @@
       assign("ValidDataFile",fixedData$newFileName,envir=uHMMenv)
       
     }
-  })
+  }
+  tkconfigure(fixButton,command=fixButton.fun)
   tkgrid(fixButton,row=6,column=1)
 
   # Summary button
-  summaryButton<-tk2button(win1$env$prediction,text=tm$summaryLabel,image="loupe",compound = "left",command=function(){
+  summaryButton<-tk2button(win1$env$prediction,text=tm$summaryLabel,image="loupe",compound = "left")
+  summaryButton.fun<-function(){
   
    if(!exists("rawValidData",where=uHMMenv)){
     
@@ -90,7 +97,8 @@
     }else{
        .unSummary(uHMMenv$rawValidData,paste(uHMMenv$saveDirectory,tm$predictionRepertory,tm$tablesRepertory,sep=""),summaryLabel=tm$summaryLabel)
    }
-  })
+  }
+  tkconfigure(summaryButton,command=summaryButton.fun)
   tkgrid(summaryButton,row=6,column=0)
   
 
@@ -102,7 +110,8 @@
          
 
   #Creation du bouton de validation du fichier demande
-  runButton<-tk2button(win1$env$prediction,text=tm$RunPredictionButtonLabel,image="run",compound = "left",command=function(){
+  runButton<-tk2button(win1$env$prediction,text=tm$RunPredictionButtonLabel,image="run",compound = "left")
+  runButton.fun<-function(){
     if(!exists("rawValidData",envir = uHMMenv)){
       tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
       
@@ -173,6 +182,7 @@
       #tkmessageBox(message=tm$textPredictionResultsWindow,type="yesno",icon="info", title=tm$titlePredictionResultsWindow)
 
     }
-  })
+  }
+  tkconfigure(runButton,command=runButton.fun)
   tkgrid(runButton,row=9,column=0,sticky="w",padx=c(leftMargin,0),pady=c(10,10))
 }

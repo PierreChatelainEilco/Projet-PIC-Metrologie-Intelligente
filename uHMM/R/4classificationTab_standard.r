@@ -21,7 +21,8 @@
   lancerCalcul<-tclVar() 
   
   
-  boutonRunClassifDefault<-tk2button(win1$env$classification,text=tm$runLabel,image="run",compound = "left",command=function(){  
+  boutonRunClassifDefault<-tk2button(win1$env$classification,text=tm$runLabel,image="run",compound = "left")
+  boutonRunClassifDefault.fun<-function(){  
 
       # message box asking whether the classification must be done      
       lancerCalcul<-tkmessageBox(title=tm$titleClassifWarning,message=tm$textClassifWarning,icon="question",type="yesno",default="yes")      
@@ -133,8 +134,8 @@
           tkmessageBox(title=tm$titleProgramIsOverWindow,message=tm$textProgramIsOverWindow, icon="info",type="ok") 
         }
       
-  })
-  
+  }
+  tkconfigure(boutonRunClassifDefault,command=boutonRunClassifDefault.fun)
   tkgrid(boutonRunClassifDefault,row=2)
   
 }

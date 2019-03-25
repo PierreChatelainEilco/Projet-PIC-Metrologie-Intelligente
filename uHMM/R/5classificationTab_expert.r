@@ -139,7 +139,8 @@
 
   
   
-  runButton<-tk2button(win1$env$classification,text=tm$runLabel,image="run",compound = "left",command=function(){
+  runButton<-tk2button(win1$env$classification,text=tm$runLabel,image="run",compound = "left")
+  runButton.fun<-function(){
     
     varEx<-as.numeric(tclvalue(tkget(uHMMenv$varExTCL)));
     stateNb<-as.numeric(tclvalue(tkget(uHMMenv$stateNbTCL)))
@@ -283,7 +284,8 @@
       }
       
     
-  })
+  }
+  tkconfigure(runButton,command=runButton.fun)
   
   
   

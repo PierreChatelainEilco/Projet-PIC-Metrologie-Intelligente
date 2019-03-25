@@ -65,11 +65,12 @@
   win1<-tkwidget(mainWindow,"labelframe",borderwidth = 0)
   tkgrid(win1, column=1,row=1,rowspan=2)
   
-  win1$env$nb <- tk2notebook(win1, tabs = c(tm$overviewTabLabel,tm$importTabLabel,tm$variableTabLabel,tm$classificationTabLabel,tm$modelingTabLabel,tm$predictionTabLabel))
+  win1$env$nb <- tk2notebook(win1, tabs = c(tm$overviewTabLabel,tm$importTabLabel,tm$metrologyTabLabel,tm$variableTabLabel,tm$classificationTabLabel,tm$modelingTabLabel,tm$predictionTabLabel))
   tkpack(win1$env$nb, fill = "both", expand = TRUE)
   
   win1$env$overview <- tk2notetab(win1$env$nb, tm$overviewTabLabel)
   win1$env$import <- tk2notetab(win1$env$nb, tm$importTabLabel)
+  win1$env$metrology<- tk2notetab(win1$env$nb, tm$metrologyTabLabel)
   win1$env$variables <- tk2notetab(win1$env$nb, tm$variableTabLabel)
   win1$env$classification <- tk2notetab(win1$env$nb, tm$classificationTabLabel)
   win1$env$modelisation <- tk2notetab(win1$env$nb, tm$modelingTabLabel)
@@ -90,27 +91,33 @@
   tkgrid(tklabel(cadreVisualisation, text=tm$importScheme,font = schemeFont),pady=3,column = 0, row = 4)
   tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=5)
   
+  # Metrology
+  cadreMetrology<-tkwidget(schemeFrame,"labelframe")
+  tkgrid(cadreMetrology, columnspan=1,row=6)
+  tkgrid(tklabel(cadreMetrology, text=tm$metrologyScheme, font = schemeFont),pady=3,column=0, row=4)
+  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=7)
+  
   # variable selection
   cadreVariables<-tkwidget(schemeFrame,"labelframe")
-  tkgrid(cadreVariables, columnspan=1, row=6)
+  tkgrid(cadreVariables, columnspan=1, row=8)
   tkgrid(tk2label(cadreVariables, text=tm$variableScheme,font = schemeFont),pady=3,column = 0, row = 4)
-  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=7)
+  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=9)
   
   # classification
   cadreClassification<-tkwidget(schemeFrame,"labelframe")
-  tkgrid(cadreClassification, columnspan=1, row=8)
+  tkgrid(cadreClassification, columnspan=1, row=10)
   tkgrid(tklabel(cadreClassification, text=tm$classificationScheme,font = schemeFont),pady=3,column = 0, row = 4)
-  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=9)
+  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=11)
   
   # modelisation
   cadreModeling<-tkwidget(schemeFrame,"labelframe")
-  tkgrid(cadreModeling, columnspan=1, row=10)
+  tkgrid(cadreModeling, columnspan=1, row=12)
   tkgrid(tklabel(cadreModeling, text=tm$modelingScheme,font = schemeFont),pady=3,column = 0, row = 4)
-  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=11)
+  tkgrid(ttklabel(schemeFrame, image="imageID", compound="image"), columnspan=1, row=13)
   
   # prediction
   cadrePrediction<-tkwidget(schemeFrame,"labelframe")
-  tkgrid(cadrePrediction, columnspan=1, row=12,pady=c(0,10))
+  tkgrid(cadrePrediction, columnspan=1, row=14,pady=c(0,10))
   tkgrid(tklabel(cadrePrediction, text=tm$predictionScheme,font = schemeFont),pady=3,column = 0, row = 4)
   
   #Recommended equipment Frame
@@ -151,17 +158,18 @@
   tkgrid(expertButton, row=3,padx=20, sticky="w")
   
   # Start button  
-  StartButton<-tk2button(win1$env$overview,text=tm$startLabel,image="run",compound = "left",
-                         command=function(){
-                           if (language!=tclvalue(languageVar2)){
-                             tm<-.languageManagement(tclvalue(languageVar2))
-                           }
-                           tk2notetab.select(win1$env$nb, tm$importTabLabel)
-                           userType<-tclvalue(user)
-                           .importTab(leftMargin=leftMargin,userType=userType,tm=tm,
-                                      console=console,graphicFrame=graphicFrame,win1=win1,uHMMenv=uHMMenv
-                           )
-                         })
+  StartButton<-tk2button(win1$env$overview,text=tm$startLabel,image="run",compound = "left")
+  StartButton.fun <-function(){
+    if (language!=tclvalue(languageVar2)){
+     tm<-.languageManagement(tclvalue(languageVar2))
+    }
+    tk2notetab.select(win1$env$nb, tm$importTabLabel)
+    userType<-tclvalue(user)
+    .importTab(leftMargin=leftMargin,userType=userType,tm=tm,
+              console=console,graphicFrame=graphicFrame,win1=win1,uHMMenv=uHMMenv
+    )
+  }
+  tkconfigure(StartButton,command=StartButton.fun)
   tkgrid(StartButton,column = 1, row = 14,padx = leftMargin, pady = c(50,120),sticky="w")
   
 }  
