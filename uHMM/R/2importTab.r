@@ -63,12 +63,12 @@
     if (!exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
       assign("firstDataFile","MarelCarnot",uHMMenv)
       assign("rawData",MarelCarnot,envir=uHMMenv)
-      assign("rawMoments",dateProcessing(uHMMenv$rawData),envir=uHMMenv)
+      assign("rawMoments",.dateProcessing(uHMMenv$rawData),envir=uHMMenv)
     }else if(exists("rawData",where=uHMMenv) & tclvalue(exampleSet)=="1"){
       #Afficher le jeu de donnees va ?tre remplacer par MarelCarnot
       assign("firstDataFile","MarelCarnot",uHMMenv)
       assign("rawData",MarelCarnot,envir=uHMMenv)
-      assign("rawMoments",dateProcessing(uHMMenv$rawData),envir=uHMMenv)
+      assign("rawMoments",.dateProcessing(uHMMenv$rawData),envir=uHMMenv)
     }
   }
   exampleSet <- tclVar("0")
