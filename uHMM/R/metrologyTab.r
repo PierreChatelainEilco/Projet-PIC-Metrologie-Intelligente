@@ -191,207 +191,226 @@
   # Next tab
   nextTabFrame <- tkwidget(win1$env$metrology,"labelframe",text=tm$titleNextFrame,borderwidth = 0)
   tkgrid(nextTabFrame,column=1,row=20,padx=c(leftMargin,0),pady=c(50,0),sticky="w")
-
-  classifButton<-tk2button(nextTabFrame,text=tm$classificationTabLabel,image="run",compound = "left")
-  classifButton.fun<-function(){
-    
-    msgBox <- tkmessageBox(message = tm$messageBox,
-                           icon = "question", type = "yesnocancel", default = "yes")
-    
-    msgBoxCharacter <- as.character(msgBox)
-    if(msgBoxCharacter == "yes"){
-      uHMMenv$rawData <- uHMMenv$dataCorrige
-      # Sauvegarde
-      repertory <- uHMMenv$metrologyOutput
-      if(!is.null(repertory)){
-        
-
-        n<-dim(uHMMenv$flagedData)[2]
-        mergedData <- c()
-        mergedData.name <- c()
-        for(k in 1:n)
-        {
-          mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$dataCorrige)[k+2])
-          mergedData <- cbind(mergedData,uHMMenv$dataCorrige[,k+2])
-          mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$flagedData)[k])
-          mergedData <- cbind(mergedData,uHMMenv$flagedData[,k])
-        }
-        mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[2],mergedData.name)
-        mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[1],mergedData.name)
-        mergedData <- cbind(uHMMenv$dataCorrige[,1:2],mergedData)
-        colnames(mergedData)<-mergedData.name
-        write.csv(mergedData,file=paste(repertory,"DataCorrige.csv",sep=""),row.names=FALSE)
-      }
-      .variableTab(leftMargin=leftMargin,userType=userType,tm=tm,
-                   console=console,graphicFrame=graphicFrame,win1=win1,
-                   uHMMenv=uHMMenv)
-      tk2notetab.select(win1$env$nb, tm$variableTabLabel)
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-    }
-    if(msgBoxCharacter == "no"){
-    if(!exists("rawData",where=uHMMenv)){
-      assign("rawData",MarelCarnot,envir=uHMMenv)
-      assign("firstDataFile","MarelCarnot",uHMMenv)
-      assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
-    }
-
-    if(!exists("rawData",where=uHMMenv)){
-      tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
-    }
-    else if(uHMMenv$saveDirectory==""){
-      tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
-    }else{
-
-      .variableTab(leftMargin=leftMargin,userType=userType,tm=tm,
-                   console=console,graphicFrame=graphicFrame,win1=win1,
-                   uHMMenv=uHMMenv)
-      tk2notetab.select(win1$env$nb, tm$variableTabLabel)
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-
-    }
-    }
-  }
-  tkconfigure(classifButton,command=classifButton.fun)
-  tkgrid(classifButton,row=21,column=1)
-
-
-  modelingButton<-tk2button(nextTabFrame,text=tm$modelingTabLabel,image="run",compound = "left")
-  modelingButton.fun<-function(){
-    msgBox <- tkmessageBox(message = tm$messageBox,
-                           icon = "question", type = "yesnocancel", default = "yes")
-    
-    msgBoxCharacter <- as.character(msgBox)
-    if(msgBoxCharacter == "yes"){
-      uHMMenv$rawData <- uHMMenv$dataCorrige
-      # Sauvegarde
-      repertory <- uHMMenv$metrologyOutput
-      if(!is.null(repertory)){
-        
-        
-        n<-dim(uHMMenv$flagedData)[2]
-        mergedData <- c()
-        mergedData.name <- c()
-        for(k in 1:n)
-        {
-          mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$dataCorrige)[k+2])
-          mergedData <- cbind(mergedData,uHMMenv$dataCorrige[,k+2])
-          mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$flagedData)[k])
-          mergedData <- cbind(mergedData,uHMMenv$flagedData[,k])
-        }
-        mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[2],mergedData.name)
-        mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[1],mergedData.name)
-        mergedData <- cbind(uHMMenv$dataCorrige[,1:2],mergedData)
-        colnames(mergedData)<-mergedData.name
-        write.csv(mergedData,file=paste(repertory,"MegaMix.csv",sep=""),row.names=FALSE)
-      }
-      .modelingTab(leftMargin=leftMargin,tm=tm,
-                   console=console,graphicFrame=graphicFrame,win1=win1,
-                   uHMMenv=uHMMenv)
-      tk2notetab.select(win1$env$nb, tm$modelingTabLabel)
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-      
-    }
-    
-    if(msgBoxCharacter == "no"){
-    if(!exists("rawData",where=uHMMenv)){
-      assign("rawData",MarelCarnot,envir=uHMMenv)
-      assign("firstDataFile","MarelCarnot",uHMMenv)
-      assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
-    }
-
-    if(!exists("rawData",where=uHMMenv)){
-      tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
-    }
-    else if(uHMMenv$saveDirectory==""){
-      tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
-    }else{
-
-      .modelingTab(leftMargin=leftMargin,tm=tm,
-                   console=console,graphicFrame=graphicFrame,win1=win1,
-                   uHMMenv=uHMMenv)
-      tk2notetab.select(win1$env$nb, tm$modelingTabLabel)
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-    }
-    }
-  }
-  tkconfigure(modelingButton,command=modelingButton.fun)
-  tkgrid(modelingButton,row=22,column=1)
-
-
-  predictButton<-tk2button(nextTabFrame,text=tm$predictionTabLabel,image="run",compound = "left")
-  predictButton.fun<-function(){
-    msgBox <- tkmessageBox(message = tm$messageBox,
-                           icon = "question", type = "yesnocancel", default = "yes")
-    
-    msgBoxCharacter <- as.character(msgBox)
-    if(msgBoxCharacter == "yes"){
-      uHMMenv$rawData <- uHMMenv$dataCorrige
-      # Sauvegarde
-      repertory <- uHMMenv$metrologyOutput
-      if(!is.null(repertory)){
-        
-        
-        n<-dim(uHMMenv$flagedData)[2]
-        mergedData <- c()
-        mergedData.name <- c()
-        for(k in 1:n)
-        {
-          mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$dataCorrige)[k+2])
-          mergedData <- cbind(mergedData,uHMMenv$dataCorrige[,k+2])
-          mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$flagedData)[k])
-          mergedData <- cbind(mergedData,uHMMenv$flagedData[,k])
-        }
-        mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[2],mergedData.name)
-        mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[1],mergedData.name)
-        mergedData <- cbind(uHMMenv$dataCorrige[,1:2],mergedData)
-        colnames(mergedData)<-mergedData.name
-        write.csv(mergedData,file=paste(repertory,"MegaMix.csv",sep=""),row.names=FALSE)
-      }
-      assign("rawValidData",uHMMenv$rawData,envir=uHMMenv)
-      assign("rawValidMoments",uHMMenv$rawMoments,envir=uHMMenv)
-      .predictionTab(leftMargin=leftMargin,tm=tm,
-                     console=console,graphicFrame=graphicFrame,win1=win1,
-                     uHMMenv=uHMMenv)
-      .periodSelectionFrame(data=uHMMenv$rawValidData,tm=tm,
-                            leftMargin=leftMargin,uHMMenv=uHMMenv,win1=win1)
-      tk2notetab.select(win1$env$nb, tm$predictionTabLabel)
-      
-      fileLab<-tklabel(win1$env$prediction,text=uHMMenv$firstDataFile)
-      tkgrid(fileLab,row=3,column=1,sticky="w")
-      
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-    }
-    if(msgBoxCharacter == "no"){
-    if(!exists("rawData",where=uHMMenv)){
-      assign("rawData",MarelCarnot,envir=uHMMenv)
-      assign("firstDataFile","MarelCarnot",uHMMenv)
-      assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
-    }
-
-    if(!exists("rawData",where=uHMMenv)){
-      tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
-    }
-    else if(uHMMenv$saveDirectory==""){
-      tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
-    }else{
-      assign("rawValidData",uHMMenv$rawData,envir=uHMMenv)
-      assign("rawValidMoments",uHMMenv$rawMoments,envir=uHMMenv)
-      .predictionTab(leftMargin=leftMargin,tm=tm,
-                     console=console,graphicFrame=graphicFrame,win1=win1,
-                     uHMMenv=uHMMenv)
-      .periodSelectionFrame(data=uHMMenv$rawValidData,tm=tm,
-                            leftMargin=leftMargin,uHMMenv=uHMMenv,win1=win1)
-      tk2notetab.select(win1$env$nb, tm$predictionTabLabel)
-
-      fileLab<-tklabel(win1$env$prediction,text=uHMMenv$firstDataFile)
-      tkgrid(fileLab,row=3,column=1,sticky="w")
-
-      tkinsert(console,"1.0","\n---------------------------------------\n")
-    }
-    }
-  }
-  tkconfigure(predictButton,command=predictButton.fun)
-  tkgrid(predictButton,row=23,column=1)
   
-  tkgrid(tklabel(win1$env$metrology, text="      "), column=1, row=23)
+  # Bouton sélection des variables
+  variableButton <- tk2button(nextTabFrame,text=tm$variableTabLabel,image="run",compound="left")
+  variableButton.fun <- function(){
+    .variableTab(
+      leftMargin=leftMargin,
+      userType=userType,
+      tm=tm,
+      console=console,
+      graphicFrame=graphicFrame,
+      win1=win1,
+      uHMMenv=uHMMenv
+    )
+    print(head(uHMMenv$rawData,6))
+    tk2notetab.select(win1$env$nb, tm$variableTabLabel)
+  }
+  tkconfigure(variableButton,command=variableButton.fun)
+  tkgrid(variableButton,row=1,column=1)
+  
+  # # Bouton classification
+  # classifButton<-tk2button(nextTabFrame,text=tm$classificationTabLabel,image="run",compound = "left")
+  # classifButton.fun<-function(){
+  #   
+  #   msgBox <- tkmessageBox(message = tm$messageBox,
+  #                          icon = "question", type = "yesnocancel", default = "yes")
+  #   
+  #   msgBoxCharacter <- as.character(msgBox)
+  #   if(msgBoxCharacter == "yes"){
+  #     uHMMenv$rawData <- uHMMenv$dataCorrige
+  #     # Sauvegarde
+  #     repertory <- uHMMenv$metrologyOutput
+  #     if(!is.null(repertory)){
+  #       
+  # 
+  #       n<-dim(uHMMenv$flagedData)[2]
+  #       mergedData <- c()
+  #       mergedData.name <- c()
+  #       for(k in 1:n)
+  #       {
+  #         mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$dataCorrige)[k+2])
+  #         mergedData <- cbind(mergedData,uHMMenv$dataCorrige[,k+2])
+  #         mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$flagedData)[k])
+  #         mergedData <- cbind(mergedData,uHMMenv$flagedData[,k])
+  #       }
+  #       mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[2],mergedData.name)
+  #       mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[1],mergedData.name)
+  #       mergedData <- cbind(uHMMenv$dataCorrige[,1:2],mergedData)
+  #       colnames(mergedData)<-mergedData.name
+  #       write.csv(mergedData,file=paste(repertory,"DataCorrige.csv",sep=""),row.names=FALSE)
+  #     }
+  #     .variableTab(leftMargin=leftMargin,userType=userType,tm=tm,
+  #                  console=console,graphicFrame=graphicFrame,win1=win1,
+  #                  uHMMenv=uHMMenv)
+  #     tk2notetab.select(win1$env$nb, tm$variableTabLabel)
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  #   }
+  #   if(msgBoxCharacter == "no"){
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     assign("rawData",MarelCarnot,envir=uHMMenv)
+  #     assign("firstDataFile","MarelCarnot",uHMMenv)
+  #     assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
+  #   }
+  # 
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }
+  #   else if(uHMMenv$saveDirectory==""){
+  #     tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }else{
+  # 
+  #     .variableTab(leftMargin=leftMargin,userType=userType,tm=tm,
+  #                  console=console,graphicFrame=graphicFrame,win1=win1,
+  #                  uHMMenv=uHMMenv)
+  #     tk2notetab.select(win1$env$nb, tm$variableTabLabel)
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  # 
+  #   }
+  #   }
+  # }
+  # tkconfigure(classifButton,command=classifButton.fun)
+  # tkgrid(classifButton,row=21,column=1)
+  # 
+  # # Bouton modelisation
+  # modelingButton<-tk2button(nextTabFrame,text=tm$modelingTabLabel,image="run",compound = "left")
+  # modelingButton.fun<-function(){
+  #   msgBox <- tkmessageBox(message = tm$messageBox,
+  #                          icon = "question", type = "yesnocancel", default = "yes")
+  #   
+  #   msgBoxCharacter <- as.character(msgBox)
+  #   if(msgBoxCharacter == "yes"){
+  #     uHMMenv$rawData <- uHMMenv$dataCorrige
+  #     # Sauvegarde
+  #     repertory <- uHMMenv$metrologyOutput
+  #     if(!is.null(repertory)){
+  #       
+  #       
+  #       n<-dim(uHMMenv$flagedData)[2]
+  #       mergedData <- c()
+  #       mergedData.name <- c()
+  #       for(k in 1:n)
+  #       {
+  #         mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$dataCorrige)[k+2])
+  #         mergedData <- cbind(mergedData,uHMMenv$dataCorrige[,k+2])
+  #         mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$flagedData)[k])
+  #         mergedData <- cbind(mergedData,uHMMenv$flagedData[,k])
+  #       }
+  #       mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[2],mergedData.name)
+  #       mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[1],mergedData.name)
+  #       mergedData <- cbind(uHMMenv$dataCorrige[,1:2],mergedData)
+  #       colnames(mergedData)<-mergedData.name
+  #       write.csv(mergedData,file=paste(repertory,"MegaMix.csv",sep=""),row.names=FALSE)
+  #     }
+  #     .modelingTab(leftMargin=leftMargin,tm=tm,
+  #                  console=console,graphicFrame=graphicFrame,win1=win1,
+  #                  uHMMenv=uHMMenv)
+  #     tk2notetab.select(win1$env$nb, tm$modelingTabLabel)
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  #     
+  #   }
+  #   
+  #   if(msgBoxCharacter == "no"){
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     assign("rawData",MarelCarnot,envir=uHMMenv)
+  #     assign("firstDataFile","MarelCarnot",uHMMenv)
+  #     assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
+  #   }
+  # 
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }
+  #   else if(uHMMenv$saveDirectory==""){
+  #     tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }else{
+  # 
+  #     .modelingTab(leftMargin=leftMargin,tm=tm,
+  #                  console=console,graphicFrame=graphicFrame,win1=win1,
+  #                  uHMMenv=uHMMenv)
+  #     tk2notetab.select(win1$env$nb, tm$modelingTabLabel)
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  #   }
+  #   }
+  # }
+  # tkconfigure(modelingButton,command=modelingButton.fun)
+  # tkgrid(modelingButton,row=22,column=1)
+  # 
+  # # Bouton Prediction
+  # predictButton<-tk2button(nextTabFrame,text=tm$predictionTabLabel,image="run",compound = "left")
+  # predictButton.fun<-function(){
+  #   msgBox <- tkmessageBox(message = tm$messageBox,
+  #                          icon = "question", type = "yesnocancel", default = "yes")
+  #   
+  #   msgBoxCharacter <- as.character(msgBox)
+  #   if(msgBoxCharacter == "yes"){
+  #     uHMMenv$rawData <- uHMMenv$dataCorrige
+  #     # Sauvegarde
+  #     repertory <- uHMMenv$metrologyOutput
+  #     if(!is.null(repertory)){
+  #       
+  #       
+  #       n<-dim(uHMMenv$flagedData)[2]
+  #       mergedData <- c()
+  #       mergedData.name <- c()
+  #       for(k in 1:n)
+  #       {
+  #         mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$dataCorrige)[k+2])
+  #         mergedData <- cbind(mergedData,uHMMenv$dataCorrige[,k+2])
+  #         mergedData.name <- cbind(mergedData.name,colnames(uHMMenv$flagedData)[k])
+  #         mergedData <- cbind(mergedData,uHMMenv$flagedData[,k])
+  #       }
+  #       mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[2],mergedData.name)
+  #       mergedData.name <- cbind(colnames(uHMMenv$dataCorrige)[1],mergedData.name)
+  #       mergedData <- cbind(uHMMenv$dataCorrige[,1:2],mergedData)
+  #       colnames(mergedData)<-mergedData.name
+  #       write.csv(mergedData,file=paste(repertory,"MegaMix.csv",sep=""),row.names=FALSE)
+  #     }
+  #     assign("rawValidData",uHMMenv$rawData,envir=uHMMenv)
+  #     assign("rawValidMoments",uHMMenv$rawMoments,envir=uHMMenv)
+  #     .predictionTab(leftMargin=leftMargin,tm=tm,
+  #                    console=console,graphicFrame=graphicFrame,win1=win1,
+  #                    uHMMenv=uHMMenv)
+  #     .periodSelectionFrame(data=uHMMenv$rawValidData,tm=tm,
+  #                           leftMargin=leftMargin,uHMMenv=uHMMenv,win1=win1)
+  #     tk2notetab.select(win1$env$nb, tm$predictionTabLabel)
+  #     
+  #     fileLab<-tklabel(win1$env$prediction,text=uHMMenv$firstDataFile)
+  #     tkgrid(fileLab,row=3,column=1,sticky="w")
+  #     
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  #   }
+  #   if(msgBoxCharacter == "no"){
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     assign("rawData",MarelCarnot,envir=uHMMenv)
+  #     assign("firstDataFile","MarelCarnot",uHMMenv)
+  #     assign("rawMoments",dateProcessing(MarelCarnot),envir=uHMMenv)
+  #   }
+  # 
+  #   if(!exists("rawData",where=uHMMenv)){
+  #     tkmessageBox(message=tm$noFileMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }
+  #   else if(uHMMenv$saveDirectory==""){
+  #     tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
+  #   }else{
+  #     assign("rawValidData",uHMMenv$rawData,envir=uHMMenv)
+  #     assign("rawValidMoments",uHMMenv$rawMoments,envir=uHMMenv)
+  #     .predictionTab(leftMargin=leftMargin,tm=tm,
+  #                    console=console,graphicFrame=graphicFrame,win1=win1,
+  #                    uHMMenv=uHMMenv)
+  #     .periodSelectionFrame(data=uHMMenv$rawValidData,tm=tm,
+  #                           leftMargin=leftMargin,uHMMenv=uHMMenv,win1=win1)
+  #     tk2notetab.select(win1$env$nb, tm$predictionTabLabel)
+  # 
+  #     fileLab<-tklabel(win1$env$prediction,text=uHMMenv$firstDataFile)
+  #     tkgrid(fileLab,row=3,column=1,sticky="w")
+  # 
+  #     tkinsert(console,"1.0","\n---------------------------------------\n")
+  #   }
+  #   }
+  # }
+  # tkconfigure(predictButton,command=predictButton.fun)
+  # tkgrid(predictButton,row=23,column=1)
+  # 
+  # tkgrid(tklabel(win1$env$metrology, text="      "), column=1, row=23)
 }
