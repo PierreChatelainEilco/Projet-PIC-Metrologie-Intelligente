@@ -104,7 +104,7 @@
     .saveDirectory(win1$env$import, output="saveDirectory",tm=tm,uHMMenv=uHMMenv)#,fileName=firstDataFile,fixSumRow=5)
     
     # Fix button
-    fixButton<-tk2button(win1$env$import,text=tm$fixDataLabel,image="fix",compound = "left")
+    fixButton<-tk2button(buttonsFrame,text=tm$fixDataLabel,image="fix",compound = "left",width=9)
     fixButton.fun<-function(){
       if(!exists("saveDirectory",where=uHMMenv)){
         tkmessageBox(message=tm$noDirectoryMsg,type="ok",icon="info", title=tm$warningLabel)
@@ -123,15 +123,25 @@
       }
     }
     tkconfigure(fixButton,command=fixButton.fun)
-    tkgrid(fixButton,row=12,column=1)
-        
-      
+    tkgrid(fixButton,row=1,column=2,padx=10)
+
+    # Report button
+    reportButton <- tk2button(buttonsFrame,text=tm$reportLabel,image="fix",compound = "left",width=9)
+    reportButton.fun <- function(){
+      tkmessageBox(message="Chaque chose en son temps petit scarabé !",type="ok",icon="info",title="C'est pour bientôt !")
+    }
+    tkconfigure(reportButton,command=reportButton.fun)
+    tkgrid(reportButton,row=1,column=3,padx=10)
   }
   tkconfigure(directoryButton,command=directoryButton.fun)
   tkgrid(directoryButton, column=0, row=8,sticky="w",padx=c(leftMargin,0))
   
+  
+  buttonsFrame <- tkwidget(win1$env$import,"labelframe",text="",borderwidth = 0)
+  tkgrid(buttonsFrame,row=13,column=0,padx=c(leftMargin,0),sticky="w")
+  
   #Creation du bouton permettant de faire un summary
-  summaryButton<-tk2button(win1$env$import,text=tm$summaryLabel,image="loupe",compound = "left")
+  summaryButton<-tk2button(buttonsFrame,text=tm$summaryLabel,image="loupe",compound ="left",width=9)
   summaryButton.fun<-function(){
     
     if(!exists("rawData",where=uHMMenv)){
@@ -146,7 +156,7 @@
     }
   }
   tkconfigure(summaryButton,command=summaryButton.fun)
-  tkgrid(summaryButton,row=12,column=0)
+  tkgrid(summaryButton,row=1,column=1,padx=10)
   
   
   #Creation du bloc precisant ce que l'on veut comme fichier TXT
@@ -178,7 +188,7 @@
     }
   }
   tkconfigure(metrologyButton,command=metrologyButton.fun)
-  tkgrid(metrologyButton,row=14,column=1)
+  tkgrid(metrologyButton,row=1,column=1)
   
   tkgrid(tklabel(win1$env$import, text="      "), column=1, row=14)
 }
